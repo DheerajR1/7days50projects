@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Report Insight UI</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="panel top-panel">
+        <div>
+          <h1>Test Report Insight Assistant</h1>
+          <p class="subtitle">Upload test-report files, inspect processed datasets, and ask questions.</p>
+        </div>
+        <div class="status-pill" id="llmStatus" aria-live="polite">
+          <span class="status-dot"></span>
+          <span class="status-text">LLM Connected</span>
+        </div>
+      </header>
+
+      <section class="panel uploads-panel" aria-label="Upload and processed files">
+        <div class="upload-actions">
+          <button id="openUploadModal" class="btn btn-primary" type="button">Upload Test Report</button>
+          <p class="helper-text">Choose a report file and processing settings.</p>
+        </div>
+
+        <div class="file-list-wrap">
+          <h2>Processed Files</h2>
+          <ul id="processedFilesList" class="processed-files" aria-label="Processed files list"></ul>
+        </div>
+      </section>
+
+      <section class="panel flow-panel" aria-label="Query flow status">
+        <div class="flow-pills" role="list" aria-label="Query flow steps">
+          <span class="pill" role="listitem">Ask</span>
+          <span class="pill" role="listitem">Report</span>
+          <span class="pill" role="listitem">Schema</span>
+          <span class="pill" role="listitem">Planner</span>
+          <span class="pill" role="listitem">LLM Engine</span>
+          <span class="pill" role="listitem">Insights</span>
+          <span class="pill" role="listitem">Answer</span>
+        </div>
+        <p class="elapsed">Elapsed Time: <strong id="elapsedTime">00.00s</strong></p>
+      </section>
+
+      <section class="panel chat-panel" aria-label="Conversation">
+        <div id="chatWindow" class="chat-window">
+          <article class="msg assistant-msg">
+            <p>Hi! Upload a processed test report and ask your analysis question.</p>
+          </article>
+        </div>
+        <form id="chatForm" class="chat-input-row">
+          <label for="chatInput" class="visually-hidden">Ask a question</label>
+          <input
+            id="chatInput"
+            name="chatInput"
+            type="text"
+            placeholder="Ask about pass/fail trends, flaky suites, modules, etc."
+            required
+          />
+          <button type="submit" class="btn btn-primary">Ask</button>
+        </form>
+      </section>
+    </main>
+
+    <dialog id="uploadModal" class="upload-modal">
+      <form id="uploadForm" method="dialog" class="modal-body">
+        <h2>Upload Test Report</h2>
+
+        <label for="reportFile">Test report file</label>
+        <input id="reportFile" name="reportFile" type="file" accept=".xlsx,.xls,.csv" required />
+
+        <label for="projectName">Project name</label>
+        <input id="projectName" name="projectName" type="text" placeholder="e.g., Billing Service" required />
+
+        <label for="sheetNumber">Sheet number to process</label>
+        <input id="sheetNumber" name="sheetNumber" type="number" min="1" value="1" required />
+
+        <label for="fileType">Type of file</label>
+        <select id="fileType" name="fileType" required>
+          <option value="Functional Regression">Functional Regression</option>
+          <option value="API Automation">API Automation</option>
+          <option value="Performance">Performance</option>
+          <option value="Security">Security</option>
+        </select>
+
+        <div class="modal-actions">
+          <button type="submit" value="upload" class="btn btn-primary">Upload</button>
+          <button type="button" id="cancelUpload" class="btn btn-secondary">Cancel</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
