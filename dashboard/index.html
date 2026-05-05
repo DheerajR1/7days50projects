@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queue Monitor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Distributed Job Queue Dashboard</h1>
+    <div class="status-pill" id="liveStatus">● Live</div>
+  </header>
+
+  <main class="grid">
+    <section class="card stats">
+      <h2>System Metrics</h2>
+      <div class="stat-grid">
+        <div><span>Total Jobs</span><strong id="totalJobs">0</strong></div>
+        <div><span>Queue Size</span><strong id="queueSize">0</strong></div>
+        <div><span>Avg Processing Time</span><strong id="avgTime">0s</strong></div>
+        <div><span>Last Updated</span><strong id="lastUpdated">-</strong></div>
+      </div>
+    </section>
+
+    <section class="card chart-card">
+      <h2>Jobs by Status</h2>
+      <div id="statusBars" class="bars"></div>
+    </section>
+
+    <section class="card workers">
+      <h2>Workers</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Worker ID</th>
+              <th>IP Address</th>
+              <th>Status</th>
+              <th>Load</th>
+              <th>Capacity</th>
+              <th>Last Heartbeat</th>
+            </tr>
+          </thead>
+          <tbody id="workersBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
